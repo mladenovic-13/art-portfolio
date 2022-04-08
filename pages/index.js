@@ -1,16 +1,17 @@
 import Gallery from "../src/components/Gallery";
 import Heading from "../src/components/Heading";
+import Hero from "../src/components/Hero";
 import Header from "../src/layout/Header";
 import styles from "../styles/styles.module.css";
 
 export default function Home() {
   return (
-    <>
+    <div className="">
       <Header />
-      <div className={`${styles.index} pt-24`}>
+      <div className={`${styles.index} pt-16 lg:pt-24`}>
         <Heading />
         <Gallery />
       </div>
-    </>
+    </div>
   );
 }
