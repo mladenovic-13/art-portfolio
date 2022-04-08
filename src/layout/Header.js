@@ -1,19 +1,106 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Transition } from "@headlessui/react";
+import { useState } from "react";
 
 export default function Header() {
-  return (
-    <div className="top-0 z-20 absolute grid grid-cols-3 bg-primary w-full text-2xl text-bg-primary place-items-center">
-      <div className="transition ease-in-out hover:scale-110 duration-200 hover:text-white">
-        <Link href="#">O meni</Link>
-      </div>
-      <div className="ml-4 mt-1 transition ease-in-out hover:scale-110 duration-200 hover:text-white">
-        <Image alt="" src="/images/logo.png" width={200} height={60}></Image>
-      </div>
+  const [isOpen, setIsOpen] = useState(false);
 
-      <div className="ransition ease-in-out hover:scale-110 duration-200 hover:text-white">
-        <Link href="#">Kontakt</Link>
+  return (
+    <>
+      <div className="lg:px-16 flex place-items-center justify-between bg-primary w-full text-2xl text-bg-primary">
+        <div className="hidden md:block transition ease-in-out hover:scale-110 duration-200 hover:text-white">
+          <Link href="#">O meni</Link>
+        </div>
+        <div className="ml-3 mt-1 w-40 transition ease-in-out hover:scale-110 duration-200 hover:text-white">
+          <Image alt="" src="/images/logo.png" width={200} height={60}></Image>
+        </div>
+
+        <div className="hidden md:block ransition ease-in-out hover:scale-110 duration-200 hover:text-white">
+          <Link href="#">Kontakt</Link>
+        </div>
+
+        <div className="mr-2 flex md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            className=" inline-flex items-center justify-center p-2 rounded-md  text-bg-primary"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span className="sr-only">Open main menu</span>
+            {!isOpen ? (
+              <svg
+                className="block h-10 w-10"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="block h-10 w-10"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
-    </div>
+      <Transition
+        show={isOpen}
+        enter="transition ease-out duration-200 transform"
+        enterFrom="opacity-0 scale-95"
+        enterTo="opacity-100 scale-100"
+        leave="transition ease-in duration-75 transform"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
+        {(ref) => (
+          <div className="md:hidden" id="mobile-menu">
+            <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <Link
+                href="solutions"
+                className=" text-primary-darker block px-3 py-2 rounded-md text-lg font-medium"
+              >
+                Solutions
+              </Link>
+
+              <Link
+                href="about"
+                className="text-primary-darker block px-3 py-2 rounded-md text-lg font-medium"
+              >
+                About Us
+              </Link>
+
+              <a
+                href="https://floteq.sitelantern.com/console/"
+                className="my-6 bg-primary-darker uppercase mx-auto lg:mx-0  text-white font-bold rounded-full py-2 px-6 shadow-lg focus:outline-none focus:shadow-outline"
+              >
+                Client Login
+              </a>
+            </div>
+          </div>
+        )}
+      </Transition>
+    </>
   );
 }

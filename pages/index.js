@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="">
       <Header />
-      <div className={`${styles.index} pt-16 lg:pt-24`}>
+      <div className={`${styles.index} pt-3`}>
         <Heading />
         <Gallery />
       </div>

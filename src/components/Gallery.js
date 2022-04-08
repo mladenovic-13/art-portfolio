@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Gallery() {
   return (
     <>
-      <div className="pt-6 flex flex-col lg:flex-row w-11/12 mx-auto space-y-4 lg:hidden">
+      <div className="pt-2 flex flex-col lg:flex-row w-11/12 mx-auto space-y-4 lg:hidden">
         <div className="">
           <Image
             objectFit="cover"
