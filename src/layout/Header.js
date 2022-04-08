@@ -1,10 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Transition } from "@headlessui/react";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useState } from "react";
 
+const links = [
+  { name: "O Meni", to: "#", id: 1 },
+  { name: "Kontakt", to: "#", id: 2 },
+  { name: "Galerija", to: "#", id: 3 },
+];
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
+
+const sideVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+    },
+  },
+};
+
 export default function Header() {
+  const [open, cycleOpen] = useCycle(false, true);
   const [isOpen, setIsOpen] = useState(false);
+  function handleClick() {
+    cycleOpen();
+    setIsOpen(!isOpen);
+  }
 
   return (
     <>
@@ -22,7 +55,7 @@ export default function Header() {
 
         <div className="mr-2 flex md:hidden">
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleClick}
             type="button"
             className=" inline-flex items-center justify-center p-2 rounded-md  text-bg-primary"
             aria-controls="mobile-menu"
@@ -65,42 +98,40 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <Transition
-        show={isOpen}
-        enter="transition ease-out duration-200 transform"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-75 transform"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        {(ref) => (
-          <div className="md:hidden" id="mobile-menu">
-            <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link
-                href="solutions"
-                className=" text-primary-darker block px-3 py-2 rounded-md text-lg font-medium"
-              >
-                Solutions
-              </Link>
 
-              <Link
-                href="about"
-                className="text-primary-darker block px-3 py-2 rounded-md text-lg font-medium"
-              >
-                About Us
-              </Link>
-
-              <a
-                href="https://floteq.sitelantern.com/console/"
-                className="my-6 bg-primary-darker uppercase mx-auto lg:mx-0  text-white font-bold rounded-full py-2 px-6 shadow-lg focus:outline-none focus:shadow-outline"
-              >
-                Client Login
-              </a>
-            </div>
-          </div>
+      <AnimatePresence>
+        {open && (
+          <motion.aside
+            initial={{ width: 0 }}
+            animate={{
+              width: "100vw",
+            }}
+            exit={{
+              width: 0,
+              transition: { delay: 0.7, duration: 0.3 },
+            }}
+          >
+            <motion.div
+              className="container flex flex-col p-6 bg-bg-primary-darker"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={sideVariants}
+            >
+              {links.map(({ name, to, id }) => (
+                <motion.a
+                  key={id}
+                  href={to}
+                  variants={itemVariants}
+                  className="text-right pb-2  text-4xl font-semibold text-primary"
+                >
+                  {name}
+                </motion.a>
+              ))}
+            </motion.div>
+          </motion.aside>
         )}
-      </Transition>
+      </AnimatePresence>
     </>
   );
 }
