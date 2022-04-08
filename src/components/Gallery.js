@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
+import Animated from "../layout/Animated";
 
 export default function Gallery() {
   return (
     <>
       <div className="pt-2 flex flex-col lg:flex-row w-11/12 mx-auto space-y-4 lg:hidden">
-        <div className="">
+        <Animated>
           <Image
             objectFit="cover"
             width={600}
@@ -13,8 +15,8 @@ export default function Gallery() {
             src="/images/img-1.jpg"
             className="rounded-lg"
           />
-        </div>
-        <div className="">
+        </Animated>
+        <Animated>
           <Image
             objectFit="cover"
             width={600}
@@ -23,8 +25,8 @@ export default function Gallery() {
             src="/images/img-3.jpg"
             className="rounded-lg"
           />
-        </div>
-        <div className="">
+        </Animated>
+        <Animated>
           <Image
             objectFit="cover"
             width={600}
@@ -33,8 +35,8 @@ export default function Gallery() {
             src="/images/img-2.jpg"
             className="rounded-lg"
           />
-        </div>
-        <div className="">
+        </Animated>
+        <Animated>
           <Image
             objectFit="cover"
             width={600}
@@ -43,7 +45,7 @@ export default function Gallery() {
             src="/images/img-4.jpg"
             className="rounded-lg"
           />
-        </div>
+        </Animated>
       </div>
     </>
   );
