@@ -1,6 +1,5 @@
 import Gallery from "../src/components/Gallery";
 import Heading from "../src/components/Heading";
-import Hero from "../src/components/Hero";
 import Header from "../src/layout/Header";
 import styles from "../styles/styles.module.css";
 

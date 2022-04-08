@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useState } from "react";
 
 const links = [
-  { name: "O Meni", to: "#", id: 1 },
+  { name: "O Meni", to: "/o-meni", id: 1 },
   { name: "Kontakt", to: "#", id: 2 },
   { name: "Galerija", to: "#", id: 3 },
 ];
@@ -43,11 +43,15 @@ export default function Header() {
     <>
       <div className="lg:px-16 flex place-items-center justify-between bg-primary w-full text-2xl text-bg-primary">
         <div className="hidden md:block transition ease-in-out hover:scale-110 duration-200 hover:text-white">
-          <Link href="#">O meni</Link>
+          <Link href="/o-meni">O meni</Link>
         </div>
-        <div className="ml-3 mt-1 w-40 transition ease-in-out hover:scale-110 duration-200 hover:text-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          className="ml-3 mt-1 w-40 transition ease-in-out hover:scale-110 duration-200 hover:text-white"
+        >
           <Image alt="" src="/images/logo.png" width={200} height={60}></Image>
-        </div>
+        </motion.div>
 
         <div className="hidden md:block ransition ease-in-out hover:scale-110 duration-200 hover:text-white">
           <Link href="#">Kontakt</Link>
@@ -105,10 +109,11 @@ export default function Header() {
             initial={{ width: 0 }}
             animate={{
               width: "100vw",
+              transition: { duration: 0.2 },
             }}
             exit={{
               width: 0,
-              transition: { delay: 0.7, duration: 0.3 },
+              transition: { delay: 0.6, duration: 0.2 },
             }}
           >
             <motion.div
