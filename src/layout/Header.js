@@ -6,7 +6,7 @@ import { useState } from "react";
 const links = [
   { name: "O Meni", to: "/o-meni", id: 1 },
   { name: "Kontakt", to: "#", id: 2 },
-  { name: "Galerija", to: "#", id: 3 },
+  { name: "Galerija", to: "/galerija", id: 3 },
 ];
 
 const itemVariants = {
@@ -50,7 +50,14 @@ export default function Header() {
           animate={{ opacity: 1, transition: { duration: 0.2 } }}
           className="ml-3 mt-1 w-40 transition ease-in-out hover:scale-110 duration-200 hover:text-white"
         >
-          <Image alt="" src="/images/logo.png" width={200} height={60}></Image>
+          <Link href="/" passHref>
+            <Image
+              alt=""
+              src="/images/logo.png"
+              width={200}
+              height={60}
+            ></Image>
+          </Link>
         </motion.div>
 
         <div className="hidden md:block ransition ease-in-out hover:scale-110 duration-200 hover:text-white">

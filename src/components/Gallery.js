@@ -1,10 +1,16 @@
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Animated from "../layout/Animated";
+import Heading from "./Heading";
 
-export default function Gallery() {
+export default function Gallery({ imagesUrl }) {
   return (
     <>
+      <div className="lg:hidden">
+        <Animated>
+          <Heading />
+        </Animated>
+      </div>
+
       <div className="pt-2 flex flex-col lg:flex-row w-11/12 mx-auto space-y-4 lg:hidden">
         <Animated>
           <Image
