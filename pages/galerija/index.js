@@ -22,7 +22,7 @@ export default function index() {
           <div className="mx-auto text-center text-primary text-4xl font-bold italic w-full">
             <p>SRECAN RODJENDAN</p>
             <p>
-              Na zahtev Zorana Mladenovica, a pravi portfolio ce biti usoro ;)
+              Na zahtev Zorana Mladenovica, a pravi portfolio ce biti uskoro ;)
             </p>
           </div>
         </Animated>
